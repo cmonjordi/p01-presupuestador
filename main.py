@@ -36,22 +36,42 @@ while True:
     except ValueError:
         print("Error: Tienes que escribir un número.")
 
+# 4.1. Verificar el IVA
+while True:
+    try:
+        texto = input("% de IVA (Pulsa Enter para 21%): ")
+        if texto == "": # Si el usuario solo pulsa Enter, la respuesta está vacía
+            iva_pct = 21.0
+            break
+        iva_pct = float(texto)
+        break
+    except ValueError:
+        print("Error: Tienes que escribir un número.")
+
 # 5. HACER LOS CÁLCULOS
 subtotal = horas * tarifa
 descuento_val = subtotal * (descuento_pct / 100)
 base = subtotal - descuento_val
-iva_val = base * 0.21 # El IVA fijo al 21%
+iva_val = base * (iva_pct / 100)
 total = base + iva_val
 
 # 6. CREAR EL TEXTO DEL PRESUPUESTO
 # La 'f' antes de las comillas triples permite meter las variables entre llaves {}
 documento = f"""
-PRESUPUESTO - {cliente}
+PRESUPUESTO
+===
+Nombre: {cliente}
+Fecha: {datetime.date.today()}
+---
+Previsión:  {horas} horas
+Tarifa:     {tarifa} €/hora
 ---
 Subtotal:   {subtotal} €
 Descuento: -{descuento_val} €
+---
 Base:       {base} €
-IVA (21%):  {iva_val} €
+IVA ({iva_pct}%):  {iva_val} €
+---
 TOTAL:      {total} €
 """
 
