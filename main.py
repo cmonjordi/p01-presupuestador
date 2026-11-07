@@ -8,7 +8,7 @@ descuento = float(input("Ingrese el porcentaje de descuento: "))
 subtotal = horas_estimadas * tarifa_por_hora
 descuento = subtotal * (descuento / 100)
 base_imponible = subtotal - descuento
-iva = base_imponible * 0.21
+iva = base_imponible * (0.21 if iva_impuesto == "" else float(iva_impuesto) / 100)
 total = base_imponible + iva
 
 # factura
