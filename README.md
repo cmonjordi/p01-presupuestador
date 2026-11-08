@@ -5,7 +5,7 @@ Una herramienta de línea de comandos escrita en Python para calcular, desglosar
 ## Qué hace
 - Calcula automáticamente el subtotal, descuentos, base imponible e IVA de un servicio por horas.
 - Previene bloqueos del programa: si escribes texto en lugar de números en la tarifa o las horas, te avisará y volverá a preguntar.
-- Guarda un registro `.txt` de cada presupuesto en la carpeta `presupuestos/`.
+- Guarda un registro `.txt` de cada presupuesto en `.datos/presupuestos/`, una carpeta local excluida de Git para proteger los datos personales.
 - Permite configurar el IVA personalizado al final del proceso (con un valor por defecto del 21%).
 - Incluye un comando de resumen para auditar la suma total de facturación histórica.
 

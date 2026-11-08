@@ -3,15 +3,16 @@ import glob
 import os
 import sys
 
+CARPETA_PRESUPUESTOS = ".datos/presupuestos"
 
 def mostrar_resumen():
     print("=== RESUMEN DE FACTURACIÓN ===")
     
     # glob busca todos los archivos que terminen en .txt dentro de la carpeta presupuestos
-    archivos = glob.glob("presupuestos/*.txt")
+    archivos = glob.glob(os.path.join(CARPETA_PRESUPUESTOS, "*.txt"))
     
     if len(archivos) == 0:
-        print("No hay presupuestos guardados todavía.")
+        print(f"No hay presupuestos guardados en '{CARPETA_PRESUPUESTOS}/' todavía.")
         return # Salimos de la función sin hacer nada más
 
     total_facturado = 0.0
@@ -124,11 +125,11 @@ else:
 
     # 7. GUARDARLO EN UN ARCHIVO
     # Creamos la carpeta (exist_ok=True evita que dé error si la carpeta ya existe)
-    os.makedirs("presupuestos", exist_ok=True) 
+    os.makedirs(CARPETA_PRESUPUESTOS, exist_ok=True)
 
     # Conseguimos la fecha de hoy para el nombre del archivo
     fecha_hoy = datetime.date.today()
-    ruta_archivo = f"presupuestos/{fecha_hoy}-{cliente}.txt"
+    ruta_archivo = os.path.join(CARPETA_PRESUPUESTOS, f"{fecha_hoy}-{cliente}.txt")
 
     # Abrimos el archivo, escribimos el documento y lo cerramos con un gestor de contexto
     with open(ruta_archivo, "w", encoding="utf-8") as archivo:
