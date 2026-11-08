@@ -61,6 +61,9 @@ def pedir_numero(pregunta, valor_por_defecto=None):
             
         try:
             numero = float(texto)
+            if numero < 0:
+                print("Error: El número no puede ser negativo.")
+                continue
             return numero # 'return' hace dos cosas: sale de la función (rompe el bucle) y devuelve el número
         except ValueError:
             print("Error: Tienes que escribir un número.")
