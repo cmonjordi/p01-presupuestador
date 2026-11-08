@@ -1,0 +1,16 @@
+
+PRESUPUESTO
+===
+Nombre: jordi
+Fecha: 2026-11-08
+---
+Previsión:  3.0 horas
+Tarifa:     10.00 €/hora
+---
+Subtotal:   30.00 €
+Descuento: -0.00 €
+---
+Base:       30.00 €
+IVA (21.00%):  6.30 €
+---
+TOTAL:      36.30 €

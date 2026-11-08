@@ -1,0 +1,16 @@
+
+PRESUPUESTO
+===
+Nombre: mery
+Fecha: 2026-11-08
+---
+Previsión:  5.0 horas
+Tarifa:     5.00 €/hora
+---
+Subtotal:   25.00 €
+Descuento: -0.00 €
+---
+Base:       25.00 €
+IVA (21%): +5.25 €
+---
+TOTAL:      30.25 €

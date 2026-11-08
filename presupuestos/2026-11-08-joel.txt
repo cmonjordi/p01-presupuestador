@@ -1,0 +1,16 @@
+
+PRESUPUESTO
+===
+Nombre: joel
+Fecha: 2026-11-08
+---
+Previsión:  4.0 horas
+Tarifa:     5.00 €/hora
+---
+Subtotal:   20.00 €
+Descuento: -0.00 €
+---
+Base:       20.00 €
+IVA (21%):  4.20 €
+---
+TOTAL:      24.20 €

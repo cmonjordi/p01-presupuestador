@@ -1,52 +1,43 @@
 import datetime
 import os
 
+
+# Función para pedir un número al usuario
+def pedir_numero(pregunta, valor_por_defecto=None):
+    """
+    Esta función hace la pregunta que le pasemos y no te deja avanzar 
+    hasta que escribas un número válido.
+    """
+    while True:
+        texto = input(pregunta)
+        
+        # Si el usuario no escribe nada (pulsa Enter) y hemos configurado un valor por defecto
+        if texto == "" and valor_por_defecto is not None:
+            return valor_por_defecto
+            
+        try:
+            numero = float(texto)
+            return numero # 'return' hace dos cosas: sale de la función (rompe el bucle) y devuelve el número
+        except ValueError:
+            print("Error: Tienes que escribir un número.")
+# Final de la función pedir_numero
+
 print("=== NUEVO PRESUPUESTO ===")
 
 # 1. PEDIR EL NOMBRE
 cliente = input("Nombre del cliente: ")
 
-# 2. PEDIR LAS HORAS (Con un bucle para que no se rompa si meten texto)
-while True:
-    try:
-        texto = input("Horas estimadas: ")
-        horas = float(texto)
-        break # Si es un número, rompe el bucle y sigue adelante
-    except ValueError:
-        print("Error: Tienes que escribir un número, no texto.")
+# 2. PEDIR LAS HORAS (Con la nueva función)
+horas = pedir_numero("Horas previstas: ")
 
 # 3. PEDIR LA TARIFA
-while True:
-    try:
-        texto = input("Tarifa por hora (€): ")
-        tarifa = float(texto)
-        break
-    except ValueError:
-        print("Error: Tienes que escribir un número.")
+tarifa = pedir_numero("Tarifa por hora: ")
 
 # 4. PEDIR EL DESCUENTO
-while True:
-    try:
-        texto = input("% de descuento (Pulsa Enter para 0): ")
-        if texto == "": # Si el usuario solo pulsa Enter, la respuesta está vacía
-            descuento_pct = 0.0
-            break
-        descuento_pct = float(texto)
-        break
-    except ValueError:
-        print("Error: Tienes que escribir un número.")
+descuento_pct = pedir_numero("% de descuento (Pulsa Enter para 0%): ", valor_por_defecto=0.0)
 
 # 4.1. Verificar el IVA
-while True:
-    try:
-        texto = input("% de IVA (Pulsa Enter para 21%): ")
-        if texto == "": # Si el usuario solo pulsa Enter, la respuesta está vacía
-            iva_pct = 21.0
-            break
-        iva_pct = float(texto)
-        break
-    except ValueError:
-        print("Error: Tienes que escribir un número.")
+iva_pct = pedir_numero("% de IVA (Pulsa Enter para 21%): ", valor_por_defecto=21.0)
 
 # 5. HACER LOS CÁLCULOS
 subtotal = horas * tarifa
@@ -64,15 +55,15 @@ Nombre: {cliente}
 Fecha: {datetime.date.today()}
 ---
 Previsión:  {horas} horas
-Tarifa:     {tarifa} €/hora
+Tarifa:    x{tarifa:.2f} €/hora
 ---
-Subtotal:   {subtotal} €
-Descuento: -{descuento_val} €
+Subtotal:   {subtotal:.2f} €
+Descuento: -{descuento_val:.2f} €
 ---
-Base:       {base} €
-IVA ({iva_pct}%):  {iva_val} €
+Base:       {base:.2f} €
+IVA ({iva_pct:.0f}%): +{iva_val:.2f} €
 ---
-TOTAL:      {total} €
+TOTAL:      {total:.2f} €
 """
 
 # Mostrarlo por pantalla
