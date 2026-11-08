@@ -101,20 +101,20 @@ else:
     # 6. CREAR EL TEXTO DEL PRESUPUESTO
     # La 'f' antes de las comillas triples permite meter las variables entre llaves {}
     documento = f"""
-    === PRESUPUESTO ===
-    Fecha: {datetime.date.today()}
-    ------------------------------
-    Previsión:  {horas} horas
-    Tarifa:    x{tarifa:.2f} €/hora
-    ------------------------------
-    Subtotal:   {subtotal:.2f} €
-    Descuento: -{descuento_val:.2f} €
-    ------------------------------
-    Base:       {base:.2f} €
-    IVA ({iva_pct:.0f}%): +{iva_val:.2f} €
-    ------------------------------
-    TOTAL:      {total:.2f} €
-    """
+=== PRESUPUESTO ===
+Fecha: {datetime.date.today()}
+------------------------------
+Previsión:  {horas} horas
+Tarifa:    x{tarifa:.2f} €/hora
+------------------------------
+Subtotal:   {subtotal:.2f} €
+Descuento: -{descuento_val:.2f} €
+------------------------------
+Base:       {base:.2f} €
+IVA ({iva_pct:.0f}%): +{iva_val:.2f} €
+------------------------------
+TOTAL:      {total:.2f} €
+"""
 
     # Preguntar si se quiere mostrar por pantalla
     while True:
