@@ -95,8 +95,6 @@ else:
 
     # 2. PEDIR LAS HORAS (Con la nueva función)
     horas = pedir_numero("Horas previstas: ")
-    total_minutos = round(horas * 60)
-    horas_mostrar, minutos_mostrar = divmod(total_minutos, 60)
 
     # 3. PEDIR LA TARIFA
     tarifa = pedir_numero("Tarifa por hora: ")
@@ -120,8 +118,8 @@ else:
 === PRESUPUESTO ===
 Fecha: {datetime.date.today()}
 ------------------------------
-Previsión:  {horas_mostrar}:{minutos_mostrar:02d} horas
-Tarifa:    x{tarifa:.2f} €/hora
+Previsión:  {horas:.2f} horas
+Tarifa:     {tarifa:.2f} €/hora
 ------------------------------
 Subtotal:   {subtotal:.2f} €
 Descuento: -{descuento_val:.2f} €
