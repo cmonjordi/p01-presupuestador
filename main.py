@@ -21,7 +21,8 @@ def mostrar_resumen():
         # Extraemos solo el nombre del archivo, no toda la ruta
         nombre_limpio = os.path.basename(archivo)
         nombre_sin_extension = os.path.splitext(nombre_limpio)[0]
-        total_factura = 0.0
+        total_factura = None
+        encontro_total = False
         
         # Abrimos el archivo en modo lectura ("r")
         with open(archivo, "r") as archivo_abierto:
@@ -30,6 +31,7 @@ def mostrar_resumen():
                 linea = linea.strip()
                 # Si la línea empieza por la palabra "TOTAL:"
                 if linea.startswith("TOTAL:"):
+                    encontro_total = True
 
                     # 1. Partimos la frase por los dos puntos y nos quedamos la segunda parte
                     parte_derecha = linea.split(":")[1]
@@ -38,9 +40,21 @@ def mostrar_resumen():
                     numero_limpio = parte_derecha.replace("€", "").strip()
 
                     # 3. Lo convertimos a número y lo sumamos al total
-                    total_factura = float(numero_limpio)
-                    total_facturado += total_factura
+                    try:
+                        total_factura = float(numero_limpio)
+                    except ValueError:
+                        print(
+                            f"⚠️ Total no válido en '{nombre_sin_extension}': "
+                            f"{numero_limpio!r}. Se omite."
+                        )
+                    break
 
+        if total_factura is None:
+            if not encontro_total:
+                print(f"⚠️ No se encontró el total en '{nombre_sin_extension}'. Se omite.")
+            continue
+
+        total_facturado += total_factura
         print(f"- {total_factura:.2f} € ({nombre_sin_extension})")
 
     print("-" * 30)
@@ -81,6 +95,8 @@ else:
 
     # 2. PEDIR LAS HORAS (Con la nueva función)
     horas = pedir_numero("Horas previstas: ")
+    total_minutos = round(horas * 60)
+    horas_mostrar, minutos_mostrar = divmod(total_minutos, 60)
 
     # 3. PEDIR LA TARIFA
     tarifa = pedir_numero("Tarifa por hora: ")
@@ -104,7 +120,7 @@ else:
 === PRESUPUESTO ===
 Fecha: {datetime.date.today()}
 ------------------------------
-Previsión:  {horas} horas
+Previsión:  {horas_mostrar}:{minutos_mostrar:02d} horas
 Tarifa:    x{tarifa:.2f} €/hora
 ------------------------------
 Subtotal:   {subtotal:.2f} €
